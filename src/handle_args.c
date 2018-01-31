@@ -26,5 +26,5 @@ int	ft_handle_args(char **argv)
 	}
 	if (npaths == 0)
 		recursive(".", flags);
-	return (npaths);
+	return (0);
 }

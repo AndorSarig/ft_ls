@@ -18,20 +18,8 @@ char	*ft_get_time(data *file, int i)
 	return (time);
 }
 
-void	ft_print_lsl(data *file, char *flags)
+void	ft_print_data(data *file, int i)
 {
-	int i = 0;
-
-	ft_putstr("total ");
-	ft_putnbr(ft_nblocks(file, flags));
-	ft_putchar('\n');
-	while (file[i].name)
-	{
-		if (ft_strchr(flags, 'a') == 0)
-		{
-			while ((file[i].name)[0] == '.')
-				i++;
-		}
 		ft_putstr(file[i].rights);
 		ft_putchar(' ');
 		ft_putnbr(file[i].nlink);
@@ -46,7 +34,28 @@ void	ft_print_lsl(data *file, char *flags)
 		ft_putchar(' ');
 		ft_putstr(file[i].name);
 		ft_putchar('\n');
-		i++;
+}
+
+void	ft_print_lsl(data *file, char *flags)
+{
+	int i = 0;
+
+	ft_putstr("total ");
+	ft_putnbr(ft_nblocks(file, flags));
+	ft_putchar('\n');
+	while (file[i].name)
+	{
+		if (ft_strchr(flags, 'a') != 0)
+		{
+			ft_print_data(file, i);
+		}
+		if ((file[i].name)[0] != '.' && ft_strchr(flags, 'a') == 0)
+		{
+			ft_print_data(file, i);
+			i++;
+		}
+		else
+			i++;
 	}
 }
 
@@ -57,14 +66,19 @@ void	ft_print(data *file, char *flags)
 	i = 0;
 	while (file[i].name)
 	{
-		if (ft_strchr(flags, 'a') == 0)
+		if (ft_strchr(flags, 'a') != 0)
 		{
-			while ((file[i].name)[0] == '.')
-				i++;
+			ft_putstr(file[i].name);
+			ft_putchar('\n');
 		}
-		ft_putstr(file[i].name);
-		ft_putchar('\n');
-		i++;
+		if ((file[i].name)[0] != '.' && ft_strchr(flags, 'a') == 0)
+		{
+			ft_putstr(file[i].name);
+			ft_putchar('\n');
+			i++;
+		}
+		else
+			i++;
 	}
 }
 

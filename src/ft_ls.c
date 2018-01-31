@@ -48,11 +48,26 @@ int	ft_nblocks(data *file, char *flags)
 	return (nblocks / 2);
 }
 
+int	ft_get_nrfiles(char *path)
+{
+	DIR	*opened;
+	struct dirent	*current;
+	int	i;
+
+	i = 0;
+	opened = opendir(path);
+	while ((current = readdir(opened)))
+		i++;
+	return (i);
+}
+
 int	ft_ls(char *path, char *flags)
 {
 	data	*file;
+	int	nrfiles;
 
-	file = malloc(sizeof(data) * 500);
+	nrfiles = ft_get_nrfiles(path);
+	file = malloc(sizeof(data) * nrfiles);
 	ft_get_data(path, file);
 	if (ft_strchr(flags, 't') != NULL && ft_strchr(flags, 'r') != NULL)
 		ft_sort_revtime(file);
