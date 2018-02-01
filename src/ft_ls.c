@@ -75,7 +75,6 @@ int	ft_ls(char *path, char *flags)
 		ft_sort_time(file);
 	else if (ft_strchr(flags, 'r') != NULL)
 		ft_sort_revalph(file);
-	printf("%s:\n", path);
 	print(file, flags);
 	return (0);
 }

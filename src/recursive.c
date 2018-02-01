@@ -14,8 +14,21 @@ int	recursive(char *path, char *flags)
 			stat(current->d_name, &filestat);
 			if (S_ISDIR(filestat.st_mode))
 			{
-				if (ft_strcmp(current->d_name, ".") == 0)
-					ft_ls(path, flags);
+					if (ft_strcmp(current->d_name, ".") == 0)
+					{
+						if (ft_strchr(flags, 'a') == NULL && ft_strstr(path, "/.") == NULL)
+						{
+							ft_putchar('\n');
+							ft_putstr(ft_strjoin(path, ":\n"));
+							ft_ls(path, flags);
+						}
+						else if (ft_strchr(flags, 'a') != NULL)
+						{
+							ft_putchar('\n');
+							ft_putstr(ft_strjoin(path, ":\n"));
+							ft_ls(path, flags);
+						}
+					}
 			}
 			if (ft_strcmp(current->d_name, ".") != 0 && ft_strcmp(current->d_name, "..") != 0)
 			{
