@@ -1,14 +1,15 @@
 #include "ls.h"
 
-int	check_ill_option(char **argv, int n)
+char	check_ill_option(char **argv, int n)
 {
-	int i = 1;
+	int i;
 
+	i = 1;
 	while (argv[n][i])
 	{
 		if (argv[n][i] != 'R' && argv[n][i] != 't' && argv[n][i] != 'r'
 			&& argv[n][i] != 'a' && argv[n][i] != 'l')
-			return (1);
+			return (argv[n][i]);
 		i++;
 	}
 	return (0);
@@ -16,9 +17,11 @@ int	check_ill_option(char **argv, int n)
 
 char	*ft_get_flags(char **argv)
 {
-	int i = 1;
-	char *flags;
+	int		i;
+	char	*flags;
+	char	ill;
 
+	i = 1;
 	if (!(flags = malloc(sizeof(char) * 6)))
 		return NULL;
 	flags[5] = '\0';
@@ -26,8 +29,11 @@ char	*ft_get_flags(char **argv)
 	{
 		if (argv[i][0] == '-')
 		{
-			if (check_ill_option(argv, i) == 1)
+			if ((ill = check_ill_option(argv, i)) != 0)
+			{
+				print_ill_opt(ill);
 				return (NULL);
+			}
 			if (ft_strchr(argv[i], 'R') != NULL)
 				flags[0] = 'R';
 			else if (flags[0] == '\0' || flags[0] == ' ')

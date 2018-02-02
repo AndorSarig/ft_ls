@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   bubble_sort.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: asarig <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/02 15:07:45 by asarig            #+#    #+#             */
+/*   Updated: 2018/02/02 16:28:39 by asarig           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ls.h"
 
-int	ft_filename_cmp(char *s1, char *s2)
+int		ft_filename_cmp(char *s1, char *s2)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -26,10 +38,10 @@ int	ft_filename_cmp(char *s1, char *s2)
 		return (s1[i] - s2[j]);
 }
 
-void	ft_sort_revalph(data *file)
+void	ft_sort_revalph(t_data *file)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -37,7 +49,7 @@ void	ft_sort_revalph(data *file)
 	{
 		while (file[j].name)
 		{
-			if (ft_filename_cmp(file[i].name, file[j].name) > 0)
+			if (ft_strcmp(file[i].name, file[j].name) > 0)
 				ft_swap_data((file + i), (file + j));
 			else
 				j++;
@@ -47,10 +59,31 @@ void	ft_sort_revalph(data *file)
 	}
 }
 
-void	ft_sort_time(data *file)
+void	ft_sort_abc(t_data *file)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (file[i].name)
+	{
+		while (file[j].name)
+		{
+			if (ft_strcmp(file[i].name, file[j].name) < 0)
+				ft_swap_data((file + i), (file + j));
+			else
+				j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
+void	ft_sort_time(t_data *file)
+{
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
@@ -68,10 +101,10 @@ void	ft_sort_time(data *file)
 	}
 }
 
-void	ft_sort_revtime(data *file)
+void	ft_sort_revtime(t_data *file)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;

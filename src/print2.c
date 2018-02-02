@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_user.c                                         :+:      :+:    :+:   */
+/*   print2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asarig <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/02 16:25:53 by asarig            #+#    #+#             */
-/*   Updated: 2018/02/02 16:25:54 by asarig           ###   ########.fr       */
+/*   Created: 2018/02/02 15:48:31 by asarig            #+#    #+#             */
+/*   Updated: 2018/02/02 16:28:59 by asarig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ls.h"
 
-char	*ft_get_user(t_stat filestat)
+void	print_bad_arg(char *path, int npaths)
 {
-t_passwd	*pw;
-char		*name;
+	ft_putstr("ft_ls: ");
+	ft_putstr(path);
+	ft_putendl(": No such file or directory");
+	npaths++;
+}
 
-	if (!(pw = getpwuid(filestat.st_uid)))
-		return (NULL);
-	if (!(name = ft_strdup(pw->pw_name)))
-		return (NULL);
-	return (name);
+void	print_ill_opt(char ill)
+{
+	ft_putstr("ft_ls: illegal option -- ");
+	ft_putchar(ill);
+	ft_putchar('\n');
+	ft_putendl("usage: ft_ls [-Ralrt] [file ...]");
 }
